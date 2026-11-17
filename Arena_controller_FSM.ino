@@ -20,7 +20,7 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
   f: fight start, also unpause when in unstick state (state 2)
   spacebar: end match (also cancels a countdown)
-  r: reset after a match
+  r: reset after a match, or clear the ready lights before a match
   u: unstick
 
 note: these are case sensitive. Serial Monitor line endings (newline / carriage return) are ignored.
@@ -215,6 +215,15 @@ void loop()
         pixels.show();
         Serial.println("team 2 ready");
         triggerAudio(audio_Ready_team2,3000);
+      }
+
+      // reset before a match clears a ready press (e.g. the wrong bots readied up)
+      if ((pressed(controller_reset) || (receivedChar == 'r')) && (ready1 || ready2))
+      {
+        ready1 = false;
+        ready2 = false;
+        color_fill(255,255,255);
+        Serial.println("ready lights cleared");
       }
 
       //check start conditon

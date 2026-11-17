@@ -15,7 +15,7 @@ Arduino Mega sketch that runs a combat robotics match: ready buttons, countdown,
 | `f` | Start the match (skips the ready buttons), or unpause |
 | `u` | Pause (unstick) |
 | space | End the match (also cancels a countdown) |
-| `r` | Reset after a match |
+| `r` | Reset after a match, or clear the ready lights before one |
 
 ## States
 

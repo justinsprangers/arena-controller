@@ -32,6 +32,8 @@
 
 **Small fixes:** the button "ground" pins are now driven LOW explicitly instead of relying on the power-on default; Serial Monitor line endings (`\n`, `\r`) are ignored instead of echoed as commands; "fight paused", "tapout", etc. now end with a newline so messages don't run together; the comment said the pause color was purple but the code sets yellow (comment fixed, color kept); timer variables are `unsigned long` like `millis()`; the typo `match_lenght_millis` is now `match_length_millis`; unused variables (`DELAYVAL`, `red`, `green`, `blue`) removed.
 
+**Clear ready lights (feature branch `feature/clear-ready-lights`).** A ready press couldn't be undone: if one team readied and the match was then delayed or swapped, the next opponent's ready press started the match instantly. Now `r` or the reset button before a match clears the ready lights. Test: press one team's green, then `r`; the light clears and the match doesn't start when only the other team readies.
+
 **Docs:** new `README.md` with upload steps, serial keys, states, and the pin map.
 
 ## Behavior changes to know about
@@ -43,7 +45,6 @@
 
 ## Not changed (worth a decision)
 
-- **A ready press can't be undone.** If one team readies and the match is then delayed or swapped, the next opponent's ready press starts the match instantly. Fixed separately on branch `feature/clear-ready-lights` (reset before a match clears the ready lights).
 
 - **Timer add/subtract buttons (pins 32, 34)** are wired and set up as inputs but the code never reads them. Needs a decision on how much time each press adds or removes.
 - **LED power:** brightness 255 with all 197 pixels white draws up to about 12 A. If the supply is smaller, lower `LED_BRIGHTNESS`.
